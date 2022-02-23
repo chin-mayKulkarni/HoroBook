@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/songsFragment"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/songs" />
+
+    <item
+        android:id="@+id/mantrasFragment"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/mantras" />
+
+    <item
+        android:id="@+id/horoscopeFragment2"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/horoscope" />
+
+    <item
+        android:id="@+id/matchingFragment"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/match_making" />
+</menu>

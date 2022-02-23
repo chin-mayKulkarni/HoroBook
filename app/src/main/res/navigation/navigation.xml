@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/songsFragment">
+    <fragment
+        android:id="@+id/songsFragment"
+        android:name="com.chinmay.horobook.view.SongsFragment"
+        android:label="fragment_songs"
+        tools:layout="@layout/fragment_songs" />
+    <fragment
+        android:id="@+id/mantrasFragment"
+        android:name="com.chinmay.horobook.view.MantrasFragment"
+        android:label="fragment_mantras"
+        tools:layout="@layout/fragment_mantras" />
+    <fragment
+        android:id="@+id/horoscopeFragment2"
+        android:name="com.chinmay.horobook.view.HoroscopeFragment"
+        android:label="fragment_horoscope"
+        tools:layout="@layout/fragment_horoscope" />
+    <fragment
+        android:id="@+id/matchingFragment"
+        android:name="com.chinmay.horobook.view.MatchingFragment"
+        android:label="fragment_matching"
+        tools:layout="@layout/fragment_matching" />
+</navigation>

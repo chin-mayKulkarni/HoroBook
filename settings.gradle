@@ -1,0 +1,2 @@
+rootProject.name = "HoroBook"
+include ':app'
