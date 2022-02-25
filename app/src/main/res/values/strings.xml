@@ -5,4 +5,6 @@
     <string name="mantras">Mantras</string>
     <string name="horoscope">Horoscope</string>
     <string name="match_making">Match Making</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>
