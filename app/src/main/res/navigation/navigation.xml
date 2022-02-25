@@ -8,7 +8,11 @@
         android:id="@+id/songsFragment"
         android:name="com.chinmay.horobook.view.SongsFragment"
         android:label="fragment_songs"
-        tools:layout="@layout/fragment_songs" />
+        tools:layout="@layout/fragment_songs" >
+        <action
+            android:id="@+id/actionHoroscopeFragment"
+            app:destination="@id/matchingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mantrasFragment"
         android:name="com.chinmay.horobook.view.MantrasFragment"
