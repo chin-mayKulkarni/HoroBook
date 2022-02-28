@@ -1,14 +1,16 @@
 package com.chinmay.horobook
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
     lateinit var toggle: ActionBarDrawerToggle
@@ -29,6 +31,8 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+
+//on click listener of navigation drawer
         nav_view.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.nav_about -> Toast.makeText(
@@ -36,6 +40,17 @@ class MainActivity : AppCompatActivity() {
                     "Clicked on About Us",
                     Toast.LENGTH_LONG
                 ).show()
+
+                R.id.nav_share -> {
+                    val sendIntent = Intent()
+                    sendIntent.action = Intent.ACTION_SEND
+                    sendIntent.putExtra(
+                        Intent.EXTRA_TEXT,
+                        "Hey!!! Check out this amazing app where you can easily get All ritual songs and mantras : https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID
+                    )
+                    sendIntent.type = "text/plain"
+                    startActivity(sendIntent)
+                }
 
             }
             true

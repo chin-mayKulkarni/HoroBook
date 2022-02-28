@@ -34,7 +34,7 @@ class SongsListAdapter(val songsList: ArrayList<SongData>) : RecyclerView.Adapte
         holder.view.setOnClickListener {
             Navigation.findNavController(it).navigate(SongsFragmentDirections.actionHoroscopeFragment())
         }
-        holder.view.imageView.loadImage(songsList[position].imageUrl, getProgressDrawable(holder.view.imageView.context))
+        holder.view.imageView.loadImage("https://chandusanjith.pythonanywhere.com" + songsList[position].imageUrl, getProgressDrawable(holder.view.imageView.context))
     }
 
     override fun getItemCount() = songsList.size
