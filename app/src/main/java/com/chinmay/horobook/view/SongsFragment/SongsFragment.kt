@@ -1,14 +1,13 @@
-package com.chinmay.horobook.view
+package com.chinmay.horobook.view.SongsFragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.chinmay.horobook.R
 import com.chinmay.horobook.viewmodel.ListViewModel
 import kotlinx.android.synthetic.main.fragment_songs.*
@@ -17,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_songs.*
 class SongsFragment : Fragment() {
 
     private lateinit var viewModel : ListViewModel
-    private val songsListAdapter = SongsListAdapter(arrayListOf())
+    private val songsAlbumListAdapter = SongsAlbumListAdapter(arrayListOf())
 
 
 
@@ -38,7 +37,7 @@ class SongsFragment : Fragment() {
 
         songsList.apply {
             layoutManager =LinearLayoutManager(context)
-            adapter = songsListAdapter
+            adapter = songsAlbumListAdapter
 
         }
 
@@ -58,7 +57,7 @@ class SongsFragment : Fragment() {
         viewModel.songs.observe(viewLifecycleOwner, Observer { songs ->
             songs?.let{
                 songsList.visibility = View.VISIBLE
-                songsListAdapter.updateSongsList(songs)
+                songsAlbumListAdapter.updateSongsList(songs)
             }
         })
         viewModel.songsLoadError.observe(viewLifecycleOwner, Observer { isError ->

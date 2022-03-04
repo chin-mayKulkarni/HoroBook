@@ -10,9 +10,12 @@ interface SongsApi {
     fun getSongs() : Single<List<SongData>>*/
 
     @GET("Songs/Albums/{auth_key}")
-    fun getSongs(@Path("auth_key") auth_key: String) : Single<List<SongData>>
+    fun getSongsAlbumList(@Path("auth_key") auth_key: String) : Single<List<SongData>>
 
     @GET("Authentication/DeviceLogin/{auth_key}")
     fun authenticate(@Path("auth_key") auth_key: String) : Single<Authentication>
+
+    @GET("Songs/Songs/{albumId}/{auth_key}")
+    fun getSongsList(@Path("albumId") albumId : String, @Path("auth_key") auth_key : String) : Single<List<SongsListData>>
 
 }
