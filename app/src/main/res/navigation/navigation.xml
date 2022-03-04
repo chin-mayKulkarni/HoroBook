@@ -6,12 +6,17 @@
     app:startDestination="@id/songsFragment">
     <fragment
         android:id="@+id/songsFragment"
-        android:name="com.chinmay.horobook.view.SongsFragment"
+        android:name="com.chinmay.horobook.view.SongsFragment.SongsFragment"
         android:label="fragment_songs"
-        tools:layout="@layout/fragment_songs" >
+        tools:layout="@layout/fragment_songs">
+
+
         <action
             android:id="@+id/actionHoroscopeFragment"
             app:destination="@id/matchingFragment" />
+        <action
+            android:id="@+id/action_songsListFragment"
+            app:destination="@id/songsListFragment2" />
     </fragment>
     <fragment
         android:id="@+id/mantrasFragment"
@@ -28,4 +33,34 @@
         android:name="com.chinmay.horobook.view.MatchingFragment"
         android:label="fragment_matching"
         tools:layout="@layout/fragment_matching" />
+    <fragment
+        android:id="@+id/songsListFragment2"
+        android:name="com.chinmay.horobook.view.SongsListFragment.SongsListFragment"
+        android:label="SongsListFragment">
+        <argument
+            android:name="album_id"
+            android:defaultValue="0"
+            app:argType="string" />
+        <action
+            android:id="@+id/actionPlayerFragment"
+            app:destination="@id/playerFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/playerFragment"
+        android:name="com.chinmay.horobook.view.PlayerFragment.PlayerFragment"
+        android:label="fragment_player"
+        tools:layout="@layout/fragment_player"
+
+        >
+        <argument
+            android:name="songUrl"
+            app:argType="string"
+            android:defaultValue="0" />
+        <argument
+            android:name="songImageUrl"
+            app:argType="string"
+            android:defaultValue="0" />
+    </fragment>
+
 </navigation>

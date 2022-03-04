@@ -30,6 +30,7 @@ class SplashScreenActivity : AppCompatActivity() {
         prefHelper = SharedPreferencesHelper(applicationContext)
 
         deviceID = prefHelper?.getAuthKey().toString()
+        Log.d("DeviceID", "Device Id is: " + deviceID)
         if (deviceID.equals(" ")) {
             deviceID = generateDeviceId()
         }

@@ -6,10 +6,10 @@
     android:layout_height="match_parent">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/refreshLayout"
+        android:id="@+id/refreshSongsLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.SongsFragment.SongsFragment">
+        tools:context=".view.SongsListFragment.SongsListFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -17,7 +17,7 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/songsList"
+                android:id="@+id/songsListRecyclerView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="1dp"
@@ -30,7 +30,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/listError"
+                android:id="@+id/listSongsError"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="An error occurred while loading data"
@@ -40,7 +40,7 @@
                 app:layout_constraintTop_toTopOf="@+id/songsList" />
 
             <ProgressBar
-                android:id="@+id/loadingView"
+                android:id="@+id/loadingSongsView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="@+id/songsList"

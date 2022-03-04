@@ -37,3 +37,23 @@ data class SongData(
     @PrimaryKey(autoGenerate = true)
     var uuid: Int = 0
 }
+
+data class SongsListData(
+    @SerializedName("id")
+    val songId: String?,
+
+    @SerializedName("song_image")
+    val songImageUrl : String?,
+
+    @SerializedName("song_name")
+    val songName : String?,
+
+    @SerializedName("artist")
+    val songArtist : String?,
+
+    @SerializedName("firebase_url")
+    val songUrl : String?,
+
+
+
+)

@@ -29,8 +29,12 @@ class SongsApiService {
         return api.authenticate(auth_key)
     }
 
-    fun getSongs(auth_key: String) : Single<List<SongData>>{
-        return api.getSongs(auth_key)
+    fun getSongsAlbumList(auth_key: String) : Single<List<SongData>>{
+        return api.getSongsAlbumList(auth_key)
+    }
+
+    fun getSongsList(auth_key: String, albumId : String) : Single<List<SongsListData>>{
+        return api.getSongsList( albumId, auth_key)
     }
 
 }
