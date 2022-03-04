@@ -36,17 +36,18 @@
                 android:text="An error occurred while loading data"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/songsList" />
+                app:layout_constraintTop_toTopOf="@+id/songsListRecyclerView" />
 
             <ProgressBar
                 android:id="@+id/loadingSongsView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/songsList"
+                app:layout_constraintBottom_toBottomOf="@+id/songsListRecyclerView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/songsList" />
+                app:layout_constraintTop_toTopOf="@+id/songsListRecyclerView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -47,7 +47,7 @@ class SongsListFragment : Fragment() {
         refreshSongsLayout.setOnRefreshListener {
             listSongsError.visibility = View.GONE
             songsListRecyclerView.visibility = View.GONE
-            viewModel.refresh()
+            viewModel.refreshSongsList(albumId)
             loadingSongsView.visibility = View.VISIBLE
             refreshSongsLayout.isRefreshing =false
 
@@ -65,7 +65,7 @@ class SongsListFragment : Fragment() {
                 loadingSongsView.visibility = View.GONE
             }
         })
-        viewModel.songsLoadError.observe(viewLifecycleOwner, Observer { isError ->
+        viewModel.songsListLoadError.observe(viewLifecycleOwner, Observer { isError ->
             isError?.let {
                 listSongsError.visibility = if (it) View.VISIBLE else View.GONE
             }
