@@ -61,6 +61,10 @@
             android:name="songImageUrl"
             app:argType="string"
             android:defaultValue="0" />
+        <argument
+            android:name="songName"
+            app:argType="string"
+            android:defaultValue="0" />
     </fragment>
 
 </navigation>

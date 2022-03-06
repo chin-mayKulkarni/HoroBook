@@ -3,6 +3,7 @@ package com.chinmay.horobook.view.PlayerFragment
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,13 +16,17 @@ import com.chinmay.horobook.UrlConstants
 import com.chinmay.horobook.util.getProgressDrawable
 import com.chinmay.horobook.util.loadImage
 import kotlinx.android.synthetic.main.fragment_player.*
+import java.util.concurrent.TimeUnit
+
 
 class PlayerFragment : Fragment() {
 
     val args: PlayerFragmentArgs by navArgs()
     lateinit var handler: android.os.Handler
-    private var mediaPlayer : MediaPlayer? = null
-    private var songUrl : String? = null
+    lateinit var seekHandler: android.os.Handler
+    private var mediaPlayer: MediaPlayer? = null
+    private var songUrl: String? = null
+    private var play = true
 
 
     override fun onCreateView(
@@ -33,9 +38,20 @@ class PlayerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        seekHandler = Handler()
+
+
+
         songUrl = args.songUrl
         val songImageUrl = args.songImageUrl
+        Log.d("playerFragment", "SongListData value is : " + args.songName)
+        val songName = args.songName
 
+        song_name.text = songName
+        song_name.isSelected = true
+
+        player_btn.setImageResource(R.drawable.ic_pause)
         player_image.loadImage(
             UrlConstants.media_url + songImageUrl,
             getProgressDrawable(player_image.context)
@@ -47,77 +63,122 @@ class PlayerFragment : Fragment() {
 
     private fun controlSound(songUrl: String) {
 
-        fab_play.setOnClickListener{
-            playSong(songUrl)
-        }
+        player_btn.setOnClickListener {
 
-        fab_pause.setOnClickListener{
-            mediaPlayer?.pause()
-            fab_play.isClickable = true
-            fab_pause.isClickable = false
-            fab_stop.isClickable = true
-            Log.d("playerFragment", "Media Paused at : " + mediaPlayer!!.currentPosition/1000)
-        }
-
-        fab_stop.setOnClickListener{
-            if (mediaPlayer!=null){
-                fab_play.isClickable = true
-                fab_pause.isClickable = false
-                fab_stop.isClickable = false
-                mediaPlayer!!.stop()
-                mediaPlayer!!.reset()
-                mediaPlayer!!.release()
-
+            if (play) {
+                mediaPlayer?.pause()
+                Log.d("playerFragment", "Media Paused at : " + mediaPlayer!!.currentPosition / 1000)
+            } else {
+                playSong(songUrl)
+                Log.d(
+                    "playerFragment",
+                    "Media is playing : " + mediaPlayer!!.currentPosition / 1000
+                )
             }
+            play = !play
+            player_btn.setImageResource(if (play) R.drawable.ic_pause else R.drawable.ic_play)
         }
 
-        seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+
+        seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(p0: SeekBar?, progress: Int, fromUser: Boolean) {
-                if(fromUser) mediaPlayer!!.seekTo(progress)
+                if (fromUser) mediaPlayer!!.seekTo(progress)
             }
-            override fun onStartTrackingTouch(p0: SeekBar?) {
-            }
-            override fun onStopTrackingTouch(p0: SeekBar?) {
-            }
+
+            override fun onStartTrackingTouch(p0: SeekBar?) {}
+
+            override fun onStopTrackingTouch(p0: SeekBar?) {}
 
         })
 
     }
 
     private fun playSong(songUrl: String) {
-        fab_play.isClickable = false
-        fab_pause.isClickable = true
-        fab_stop.isClickable = true
 
-        if (mediaPlayer == null){
+
+        if (mediaPlayer == null) {
             mediaPlayer = MediaPlayer.create(context, Uri.parse(songUrl))
 
+            seekHandler.postDelayed(updateSeekBar, 15)
             initializeSeekBar(mediaPlayer!!)
         }
         mediaPlayer!!.start()
+        Log.d("playerFragment", "Total time : " + mediaPlayer!!.duration)
+        Log.d("playerFragment", "current time : " + mediaPlayer!!.currentPosition)
+        var millis = mediaPlayer!!.duration.toLong()
+
+        //val song_time_sec = mediaPlayer!!.duration / 1000 % 60
+        val hms = String.format(
+            "%02d:%02d",
+            TimeUnit.MILLISECONDS.toMinutes(millis),
+            TimeUnit.MILLISECONDS.toSeconds(millis) % TimeUnit.MINUTES.toSeconds(1)
+        )
+        Log.d("playerFragment", "Total time in minutes : " + hms)
     }
+
 
     private fun initializeSeekBar(mediaPlayer: MediaPlayer) {
         seekbar.max = mediaPlayer.duration
 
 
         handler = android.os.Handler()
-        handler.postDelayed(object : Runnable  {
+        handler.postDelayed(object : Runnable {
             override fun run() {
                 try {
                     seekbar.progress = mediaPlayer.currentPosition
-                    handler.postDelayed(this, 1000)
-                }catch (e: Exception){
+                    handler.postDelayed(this, 500)
+                } catch (e: Exception) {
                     //seekbar.progress = 0
                 }
             }
-
         }, 0)
     }
 
+    private val updateSeekBar: Runnable = object : Runnable {
+        override fun run() {
+            val totalDuration = mediaPlayer!!.duration.toLong()
+            val currentDuration = mediaPlayer!!.currentPosition.toLong()
+
+            if (mediaPlayer!!.isPlaying) {
+                // Displaying Total Duration time
+                song_end.setText("" + milliSecondsToTimer(totalDuration - currentDuration))
+                // Displaying time completed playing
+                song_start.setText("" + milliSecondsToTimer(currentDuration))
+                // Call this thread again after 15 milliseconds => ~ 1000/60fps
+                seekHandler.postDelayed(this, 500)
+            }
+        }
+    }
+
+    fun milliSecondsToTimer(milliseconds: Long): String? {
+        var finalTimerString = ""
+        var secondsString = ""
+
+        // Convert total duration into time
+        val hours = (milliseconds / (1000 * 60 * 60)).toInt()
+        val minutes = (milliseconds % (1000 * 60 * 60)).toInt() / (1000 * 60)
+        val seconds = (milliseconds % (1000 * 60 * 60) % (1000 * 60) / 1000).toInt()
+        // Add hours if there
+        if (hours > 0) {
+            finalTimerString = "$hours:"
+        }
+
+        // Prepending 0 to seconds if it is one digit
+        secondsString = if (seconds < 10) {
+            "0$seconds"
+        } else {
+            "" + seconds
+        }
+        finalTimerString = "$finalTimerString$minutes:$secondsString"
+
+        // return timer string
+        return finalTimerString
+    }
+
+
     override fun onPause() {
         super.onPause()
-        if(mediaPlayer!=null){
+        if (mediaPlayer != null) {
             //mediaPlayer!!.pause()
         }
         Log.d("playerFragment", "OnPause called")
@@ -126,7 +187,7 @@ class PlayerFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
-        if(mediaPlayer!=null){
+        if (mediaPlayer != null) {
             mediaPlayer!!.pause()
         }
         Log.d("playerFragment", "OnStop called")
@@ -140,3 +201,4 @@ class PlayerFragment : Fragment() {
     }
 
 }
+

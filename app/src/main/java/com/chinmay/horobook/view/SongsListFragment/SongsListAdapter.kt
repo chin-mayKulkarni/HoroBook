@@ -40,7 +40,7 @@ class SongsListAdapter(val songsList: ArrayList<SongsListData>) :
             //val action = SongsFragmentDirections.actionSongsListFragment(songsList[position].songUrl.toString())
             Navigation.findNavController(it)
                 .navigate(SongsListFragmentDirections.actionPlayerFragment(songsList[position].songUrl.toString(),
-                    songsList[position].songImageUrl.toString()))
+                    songsList[position].songImageUrl.toString(), songsList[position].songName.toString()))
             Toast.makeText(
                 holder.view.context,
                 "Clicked on " + songsList[position].songName,
