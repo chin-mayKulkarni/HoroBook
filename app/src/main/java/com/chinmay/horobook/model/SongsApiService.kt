@@ -6,15 +6,6 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class SongsApiService {
-    private  val BASE_URL_DOGS = "https://raw.githubusercontent.com/"
-
-
-    private val api_dogs = Retrofit.Builder()
-        .baseUrl(BASE_URL_DOGS)
-        .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .build()
-        .create(SongsApi::class.java)
 
     private val BASE_URL = "https://chandusanjith.pythonanywhere.com/DaVinci/ApiV1/"
 

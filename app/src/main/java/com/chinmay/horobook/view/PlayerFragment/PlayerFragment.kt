@@ -70,6 +70,7 @@ class PlayerFragment : Fragment() {
                 Log.d("playerFragment", "Media Paused at : " + mediaPlayer!!.currentPosition / 1000)
             } else {
                 playSong(songUrl)
+
                 Log.d(
                     "playerFragment",
                     "Media is playing : " + mediaPlayer!!.currentPosition / 1000
@@ -99,9 +100,10 @@ class PlayerFragment : Fragment() {
         if (mediaPlayer == null) {
             mediaPlayer = MediaPlayer.create(context, Uri.parse(songUrl))
 
-            seekHandler.postDelayed(updateSeekBar, 15)
+
             initializeSeekBar(mediaPlayer!!)
         }
+        seekHandler.postDelayed(updateSeekBar, 15)
         mediaPlayer!!.start()
         Log.d("playerFragment", "Total time : " + mediaPlayer!!.duration)
         Log.d("playerFragment", "current time : " + mediaPlayer!!.currentPosition)
@@ -126,7 +128,7 @@ class PlayerFragment : Fragment() {
             override fun run() {
                 try {
                     seekbar.progress = mediaPlayer.currentPosition
-                    handler.postDelayed(this, 500)
+                    handler.postDelayed(this, 15)
                 } catch (e: Exception) {
                     //seekbar.progress = 0
                 }
@@ -145,7 +147,7 @@ class PlayerFragment : Fragment() {
                 // Displaying time completed playing
                 song_start.setText("" + milliSecondsToTimer(currentDuration))
                 // Call this thread again after 15 milliseconds => ~ 1000/60fps
-                seekHandler.postDelayed(this, 500)
+                seekHandler.postDelayed(this, 15)
             }
         }
     }
