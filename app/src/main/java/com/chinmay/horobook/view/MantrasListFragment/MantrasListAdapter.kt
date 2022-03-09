@@ -33,12 +33,11 @@ class MantrasListAdapter(val songsList: ArrayList<SongsListData>) :
         holder.view.name.text = songsList[position].songName
         holder.view.lifespan.text = songsList[position].songArtist
         holder.view.setOnClickListener {
-            // playAudio(holder)
-            //val action = SongsFragmentDirections.actionSongsListFragment(songsList[position].songUrl.toString())
             Navigation.findNavController(it)
                 .navigate(
-                    MantrasListFragmentDirections.actionPlayerFragment(songsList[position].songUrl.toString(),
-                    songsList[position].songImageUrl.toString(), songsList[position].songName.toString()))
+                    /*MantrasListFragmentDirections.actionPlayerFragment(songsList[position].songUrl.toString(),
+                    songsList[position].songImageUrl.toString(), songsList[position].songName.toString()))*/
+            MantrasListFragmentDirections.actionTextFragment())
             Toast.makeText(
                 holder.view.context,
                 "Clicked on " + songsList[position].songName,

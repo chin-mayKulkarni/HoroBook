@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">HoroBook</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Hello blank fragment, This is my sample text for pinch zoom demo, you can zoom in and out using pinch zoom, thanks this is a blank fragment which has some text rendered. Check if this renders properly</string>
     <string name="songs">Songs</string>
     <string name="mantras">Mantras</string>
     <string name="horoscope">Horoscope</string>

@@ -1,6 +1,9 @@
 package com.chinmay.horobook.model
 
+import com.chinmay.horobook.util.SharedPreferencesHelper
 import io.reactivex.Single
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -9,9 +12,27 @@ class SongsApiService {
 
     private val BASE_URL = "https://chandusanjith.pythonanywhere.com/DaVinci/ApiV1/"
 
+    private var prefHelper = SharedPreferencesHelper()
+
+    val headerInterceptor = Interceptor { chain ->
+        var request = chain.request()
+
+        request = request.newBuilder()
+            .addHeader("auth_key", "prefHelper.getAuthKey().toString()")
+            .build()
+        val response = chain.proceed(request)
+
+        response
+    }
+
+    private val okHttpBuilder : OkHttpClient.Builder = OkHttpClient.Builder().addInterceptor(headerInterceptor)
+
+
+
     private val api = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
+        .client(okHttpBuilder.build())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .build()
         .create(SongsApi::class.java)

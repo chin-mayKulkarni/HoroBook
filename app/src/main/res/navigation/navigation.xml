@@ -78,6 +78,16 @@
         <action
             android:id="@+id/action_playerFragment"
             app:destination="@id/playerFragment" />
+        <action
+            android:id="@+id/action_textFragment"
+            app:destination="@id/textFragment" />
+
     </fragment>
+    <fragment
+        android:id="@+id/textFragment"
+        android:name="com.chinmay.horobook.view.TextFragment"
+        android:label="fragment_text"
+        tools:layout="@layout/fragment_text" />
+
 
 </navigation>
