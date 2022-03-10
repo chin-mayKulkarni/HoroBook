@@ -19,17 +19,6 @@ data class SongData(
     @SerializedName("artist")
     val lifeSpan: String?,
 
-    /*@ColumnInfo(name = "breed_group")
-    @SerializedName("breed_group")
-    val breedGroup: String?,
-
-    @ColumnInfo(name = "bred_for")
-    @SerializedName("bred_for")
-    val bredFor: String?,
-
-    @SerializedName("temperament")
-    val temperament: String?,*/
-
     @ColumnInfo(name = "dog_url")
     @SerializedName("album_cover_image")
     val imageUrl: String?
@@ -53,7 +42,21 @@ data class SongsListData(
 
     @SerializedName("firebase_url")
     val songUrl : String?,
+)
 
+data class LyricsListData(
+    @SerializedName("id")
+    val songId: String?,
 
+    @SerializedName("song_lyric_image")
+    val songImageUrl : String?,
 
+    @SerializedName("song_name")
+    val songName : String?,
+
+    @SerializedName("artist")
+    val songArtist : String?,
+
+    @SerializedName("lyrics")
+    val songLyrics : String?,
 )

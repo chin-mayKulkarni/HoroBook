@@ -3,11 +3,12 @@ package com.chinmay.horobook
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.chinmay.horobook.view.DrawerNavigationFragments.WebActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.container_fragment)
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
+        val appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
 
         bottomNavigationView.setupWithNavController(navController)
 
@@ -35,12 +37,6 @@ class MainActivity : AppCompatActivity() {
 //on click listener of navigation drawer
         nav_view.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.nav_about -> Toast.makeText(
-                    applicationContext,
-                    "Clicked on About Us",
-                    Toast.LENGTH_LONG
-                ).show()
-
                 R.id.nav_share -> {
                     val sendIntent = Intent()
                     sendIntent.action = Intent.ACTION_SEND
@@ -50,6 +46,24 @@ class MainActivity : AppCompatActivity() {
                     )
                     sendIntent.type = "text/plain"
                     startActivity(sendIntent)
+                }
+
+                R.id.nav_privacy -> {
+                    val intent = Intent(this, WebActivity::class.java)
+                    intent.putExtra("url", UrlConstants.privacy_policy)
+                    startActivity(intent)
+                }
+
+                R.id.nav_about -> {
+                    val intent = Intent(this, WebActivity::class.java)
+                    intent.putExtra("url", UrlConstants.about_us)
+                    startActivity(intent)
+                }
+
+                R.id.nav_terms -> {
+                    val intent = Intent(this, WebActivity::class.java)
+                    intent.putExtra("url", UrlConstants.terms)
+                    startActivity(intent)
                 }
 
             }
