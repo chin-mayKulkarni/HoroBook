@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import com.chinmay.horobook.R
 import kotlinx.android.synthetic.main.fragment_text.*
 
@@ -12,6 +13,8 @@ import kotlinx.android.synthetic.main.fragment_text.*
 class TextFragment : Fragment() {
 
     var zoom_val = 25.0f
+
+    val args: TextFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,7 +26,10 @@ class TextFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val lyrics = args.lyrics
+
         mytv!!.textSize = zoom_val
+        mytv!!.text = lyrics
 
         zoom_in.setOnClickListener {
             if (zoom_val < 55.0f)

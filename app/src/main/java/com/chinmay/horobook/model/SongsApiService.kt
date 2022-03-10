@@ -49,4 +49,14 @@ class SongsApiService {
         return api.getSongsList( albumId, auth_key)
     }
 
+    fun getLyricsAlbumList(auth_key: String) : Single<List<SongData>>{
+        return api.getLyricsAlbumList(auth_key)
+    }
+
+    fun getLyricsList(auth_key: String, albumId : String) : Single<List<LyricsListData>>{
+        return api.getLyricsList( albumId, auth_key)
+    }
+
+
+
 }

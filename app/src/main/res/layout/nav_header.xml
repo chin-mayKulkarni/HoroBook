@@ -10,7 +10,7 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@drawable/me"/>
+        android:src="@drawable/ganesha"/>
 
     <TextView
         android:id="@+id/user_name"
@@ -18,14 +18,11 @@
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
         android:textSize="20sp"
-        android:text="Chinmay Kulkarni"
+        android:textStyle="bold"
+        android:text="Om Ganeshaya Namaha!"
         />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="chinmayrk01@gmail.com"/>
+
 
     <View
         android:layout_width="match_parent"

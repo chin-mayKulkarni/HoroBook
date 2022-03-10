@@ -4,9 +4,9 @@ import android.app.Application
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
+import com.chinmay.horobook.model.LyricsListData
 import com.chinmay.horobook.model.SongData
 import com.chinmay.horobook.model.SongsApiService
-import com.chinmay.horobook.model.SongsListData
 import com.chinmay.horobook.util.SharedPreferencesHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -24,7 +24,7 @@ class MantrasViewModel(application: Application) : BaseViewModel(application) {
     val mantrasLoadError = MutableLiveData<Boolean>()
     val loading = MutableLiveData<Boolean>()
 
-    val mantrasList = MutableLiveData<List<SongsListData>>()
+    val mantrasList = MutableLiveData<List<LyricsListData>>()
     val mantrasListLoadError = MutableLiveData<Boolean>()
     val loadingMantras = MutableLiveData<Boolean>()
 
@@ -36,13 +36,13 @@ class MantrasViewModel(application: Application) : BaseViewModel(application) {
         val auth_key = prefHelper.getAuthKey().toString()
 
         disposable.add(
-            songsService.getSongsList(auth_key, albumId)
+            songsService.getLyricsList(auth_key, albumId)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object: DisposableSingleObserver<List<SongsListData>>(){
-                    override fun onSuccess(t: List<SongsListData>) {
+                .subscribeWith(object: DisposableSingleObserver<List<LyricsListData>>(){
+                    override fun onSuccess(t: List<LyricsListData>) {
                         songsListRetrieved(t)
-                        Log.d("SongsList", "SongsList response :" + t)
+                        Log.d("Lyrics List", "Lyrics List response :" + t)
                     }
 
                     override fun onError(e: Throwable) {
@@ -63,7 +63,7 @@ class MantrasViewModel(application: Application) : BaseViewModel(application) {
         loading.value = true
 
         disposable.add(
-            songsService.getSongsAlbumList(prefHelper.getAuthKey().toString())
+            songsService.getLyricsAlbumList(prefHelper.getAuthKey().toString())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<List<SongData>>() {
@@ -91,7 +91,7 @@ class MantrasViewModel(application: Application) : BaseViewModel(application) {
         loading.value = false
     }
 
-    private fun songsListRetrieved(songList: List<SongsListData>){
+    private fun songsListRetrieved(songList: List<LyricsListData>){
         mantrasList.value = songList
         mantrasListLoadError.value = false
         loadingMantras.value = false
