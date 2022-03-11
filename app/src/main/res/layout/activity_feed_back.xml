@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    tools:context=".view.DrawerNavigationFragments.FeedBackActivity">
+
+    <TextView
+        android:id="@+id/header_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your feedback is most valuable, please give your feedback!!"
+        android:textAlignment="center"
+        android:textSize="@dimen/activity_horizontal_margin" />
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/txt_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header_text"
+        android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+        android:hint="NAME"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:singleLine="true" />
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/txt_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_name"
+        android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+        android:hint="EMAIL"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:singleLine="true" />
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/txt_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_email"
+        android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+        android:hint="PHONE NUMBER"
+        android:inputType="phone"
+        android:maxLines="1"
+        android:singleLine="true" />
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/txt_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_phone"
+        android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+        android:hint="Enter your valuable feedback here"
+        android:minHeight="100dp" />
+
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_margin="5dp"
+        android:enabled="false"
+        android:text="Submit Feedback" />
+
+    <TextView
+        android:id="@+id/errorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btn_submit"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/red"
+        android:visibility="gone" />
+
+</RelativeLayout>
