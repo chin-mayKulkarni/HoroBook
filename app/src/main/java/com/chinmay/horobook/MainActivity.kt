@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.chinmay.horobook.view.DrawerNavigationFragments.FeedBackActivity
 import com.chinmay.horobook.view.DrawerNavigationFragments.WebActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -63,6 +64,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_terms -> {
                     val intent = Intent(this, WebActivity::class.java)
                     intent.putExtra("url", UrlConstants.terms)
+                    startActivity(intent)
+                }
+
+                R.id.nav_feedback -> {
+                    val intent = Intent(this, FeedBackActivity::class.java)
                     startActivity(intent)
                 }
 

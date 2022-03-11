@@ -25,8 +25,8 @@ class SongsApiService {
         response
     }
 
-    private val okHttpBuilder : OkHttpClient.Builder = OkHttpClient.Builder().addInterceptor(headerInterceptor)
-
+    private val okHttpBuilder: OkHttpClient.Builder =
+        OkHttpClient.Builder().addInterceptor(headerInterceptor)
 
 
     private val api = Retrofit.Builder()
@@ -37,26 +37,34 @@ class SongsApiService {
         .build()
         .create(SongsApi::class.java)
 
-    fun authenticate(auth_key: String) : Single<Authentication>{
+    fun authenticate(auth_key: String): Single<Authentication> {
         return api.authenticate(auth_key)
     }
 
-    fun getSongsAlbumList(auth_key: String) : Single<List<SongData>>{
+    fun getSongsAlbumList(auth_key: String): Single<List<SongData>> {
         return api.getSongsAlbumList(auth_key)
     }
 
-    fun getSongsList(auth_key: String, albumId : String) : Single<List<SongsListData>>{
-        return api.getSongsList( albumId, auth_key)
+    fun getSongsList(auth_key: String, albumId: String): Single<List<SongsListData>> {
+        return api.getSongsList(albumId, auth_key)
     }
 
-    fun getLyricsAlbumList(auth_key: String) : Single<List<SongData>>{
+    fun getLyricsAlbumList(auth_key: String): Single<List<SongData>> {
         return api.getLyricsAlbumList(auth_key)
     }
 
-    fun getLyricsList(auth_key: String, albumId : String) : Single<List<LyricsListData>>{
-        return api.getLyricsList( albumId, auth_key)
+    fun getLyricsList(auth_key: String, albumId: String): Single<List<LyricsListData>> {
+        return api.getLyricsList(albumId, auth_key)
     }
 
+    fun submitFeedback(
+        auth_key: String,
+        txt_email: String,
+        txt_feedback: String,
+        txt_phone: String
+    ): Single<List<SongData>> {
+        return api.submitFeedback(auth_key, txt_email, txt_feedback, txt_phone)
+    }
 
 
 }
