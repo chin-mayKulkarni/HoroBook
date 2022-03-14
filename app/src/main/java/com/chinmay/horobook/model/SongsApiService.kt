@@ -4,6 +4,7 @@ import com.chinmay.horobook.util.SharedPreferencesHelper
 import io.reactivex.Single
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import org.json.JSONObject
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -57,13 +58,8 @@ class SongsApiService {
         return api.getLyricsList(albumId, auth_key)
     }
 
-    fun submitFeedback(
-        auth_key: String,
-        txt_email: String,
-        txt_feedback: String,
-        txt_phone: String
-    ): Single<List<SongData>> {
-        return api.submitFeedback(auth_key, txt_email, txt_feedback, txt_phone)
+    fun submitFeedback(jsonObject: JSONObject): Single<List<SongData>> {
+        return api.submitFeedback(jsonObject)
     }
 
 

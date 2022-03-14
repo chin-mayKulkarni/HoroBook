@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
     tools:context=".view.HoroscopeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <Spinner
+        android:id="@+id/myTimeZoneSpinner"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_top"/>
 
-</FrameLayout>
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/zodiacSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/myTimeZoneSpinner"
+        android:layout_marginTop="@dimen/margin_top"
+        android:padding="@dimen/margin_top"/>
+
+
+
+</RelativeLayout>

@@ -1,7 +1,11 @@
 package com.chinmay.horobook.model
 
 import io.reactivex.Single
-import retrofit2.http.*
+import org.json.JSONObject
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface SongsApi {
 
@@ -23,14 +27,8 @@ interface SongsApi {
     @GET("Songs/SongLyrics/{albumId}/{auth_key}")
     fun getLyricsList(@Path("albumId") albumId : String, @Path("auth_key") auth_key : String) : Single<List<LyricsListData>>
 
-    @FormUrlEncoded
-    @POST("Feedback/AddFeedback")
-    fun submitFeedback(
-        @Field("device") auth_key: String,
-        @Field("email") txt_email: String,
-        @Field("feedback_message") txt_feedback: String,
-        @Field("mobile") txt_phone: String
 
-    ): Single<List<SongData>>
+    @POST("Feedback/AddFeedback")
+    fun submitFeedback(@Body body: JSONObject): Single<List<SongData>>
 
 }

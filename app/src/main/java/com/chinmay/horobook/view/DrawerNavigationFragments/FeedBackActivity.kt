@@ -17,6 +17,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_feed_back.*
+import org.json.JSONObject
 
 
 class FeedBackActivity : AppCompatActivity() {
@@ -69,8 +70,16 @@ class FeedBackActivity : AppCompatActivity() {
                 Log.d("DeviceID", "Device Id is: " + deviceID)
                 showDialog("Clicked", "You have submitted the feedback")
 
+                    var jsonObj = JSONObject()
+                    jsonObj.put("device", deviceID)
+                    jsonObj.put("email", emailTxt)
+                    jsonObj.put("feedback_message", feedTxt)
+                    jsonObj.put("mobile", phNo)
+
+
+
                 disposable.add(
-                    songsService.submitFeedback(deviceID, emailTxt, feedTxt, phNo)
+                    songsService.submitFeedback( jsonObj)
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeWith(object : DisposableSingleObserver<List<SongData>>() {
@@ -104,22 +113,6 @@ class FeedBackActivity : AppCompatActivity() {
 
     }
 
-    /*private fun showDialog(title: String) {
-        val dialog = Dialog(this)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.custom_layout)
-        val body = dialog.findViewById(R.id.body) as TextView
-        body.text = title
-        val yesBtn = dialog.findViewById(R.id.yesBtn) as Button
-        val noBtn = dialog.findViewById(R.id.noBtn) as TextView
-        yesBtn.setOnClickListener {
-            dialog.dismiss()
-        }
-        noBtn.setOnClickListener { dialog.dismiss() }
-        dialog.show()
-
-    }*/
 
     private fun showDialog(title: String, msg: String) {
         val builder = AlertDialog.Builder(this)
