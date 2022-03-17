@@ -25,6 +25,12 @@ class MantrasAlbumListAdapter(val mantrasList: ArrayList<SongData>) :
         notifyDataSetChanged()
     }
 
+    fun updateSearchList(newSongsList: List<SongData>){
+        mantrasList.clear()
+        mantrasList.addAll(newSongsList)
+        notifyDataSetChanged()
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MantraViewHolder {
         val inflater = LayoutInflater.from(parent.context)

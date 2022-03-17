@@ -29,7 +29,6 @@ class SongsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_songs, container, false)
     }
 
@@ -41,7 +40,6 @@ class SongsFragment : Fragment() {
         override fun afterTextChanged(s: Editable?) {
             filterList(s.toString())
         }
-
     }
 
     private fun filterList(text: String) {
