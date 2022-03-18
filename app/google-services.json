@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "441374935783",
+    "project_id": "horobook-b11d1",
+    "storage_bucket": "horobook-b11d1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441374935783:android:f823ddafaf47763f2a3042",
+        "android_client_info": {
+          "package_name": "com.chinmay.horobook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "441374935783-0lgsi3gn1hed5l693krsnircqcqbmh7u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVXG3lDtabGbjrp29AqH6OQTmYMJYzh5Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "441374935783-0lgsi3gn1hed5l693krsnircqcqbmh7u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
