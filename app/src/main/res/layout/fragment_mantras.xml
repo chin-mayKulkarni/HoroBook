@@ -11,43 +11,44 @@
         android:layout_height="match_parent"
         tools:context=".view.MantrasFragment.MantrasFragment">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/mantras_search"
+                android:background="@drawable/background"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:layout_alignParentStart="true"
+                android:hint="Search"
+                />
 
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/mantrasList"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="1dp"
-                android:layout_marginTop="1dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="1dp"
                 android:layout_marginBottom="1dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_below="@+id/mantras_search"/>
 
             <TextView
                 android:id="@+id/mantrasError"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="An error occurred while loading data"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/mantrasList" />
+                android:layout_centerInParent="true"/>
 
             <ProgressBar
                 android:id="@+id/loadingMantrasView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/mantrasList"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/mantrasList" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
 
 
 
