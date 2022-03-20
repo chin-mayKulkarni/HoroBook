@@ -19,7 +19,7 @@ class SongsApiService {
         var request = chain.request()
 
         request = request.newBuilder()
-            .addHeader("auth_key", "prefHelper.getAuthKey().toString()")
+            /*.addHeader("auth_key", "prefHelper.getAuthKey().toString()")*/
             .build()
         val response = chain.proceed(request)
 
@@ -58,8 +58,12 @@ class SongsApiService {
         return api.getLyricsList(albumId, auth_key)
     }
 
-    fun submitFeedback(jsonObject: JSONObject): Single<List<SongData>> {
+    fun submitFeedback(jsonObject: JSONObject): Single<Feedback> {
         return api.submitFeedback(jsonObject)
+    }
+
+    fun getHoroscope( auth_key: String, jsonObject: JSONObject): Single<Horoscope>{
+        return api.getHoroscope( auth_key, jsonObject)
     }
 
 

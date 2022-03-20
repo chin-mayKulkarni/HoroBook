@@ -13,6 +13,9 @@ import com.chinmay.horobook.UrlConstants
 import com.chinmay.horobook.model.SongsListData
 import com.chinmay.horobook.util.getProgressDrawable
 import com.chinmay.horobook.util.loadImage
+import kotlinx.android.synthetic.main.fragment_songs.view.*
+import kotlinx.android.synthetic.main.fragment_songs_list.*
+import kotlinx.android.synthetic.main.fragment_songs_list.view.*
 import kotlinx.android.synthetic.main.item_song.view.*
 import java.io.IOException
 
@@ -36,16 +39,15 @@ class SongsListAdapter(val songsList: ArrayList<SongsListData>) :
         holder.view.name.text = songsList[position].songName
         holder.view.lifespan.text = songsList[position].songArtist
         holder.view.setOnClickListener {
-            // playAudio(holder)
-            //val action = SongsFragmentDirections.actionSongsListFragment(songsList[position].songUrl.toString())
             Navigation.findNavController(it)
-                .navigate(SongsListFragmentDirections.actionPlayerFragment(songsList[position].songUrl.toString(),
-                    songsList[position].songImageUrl.toString(), songsList[position].songName.toString()))
-            Toast.makeText(
-                holder.view.context,
-                "Clicked on " + songsList[position].songName,
-                Toast.LENGTH_SHORT
-            ).show()
+                .navigate(
+                    SongsListFragmentDirections.actionPlayerFragment(
+                        songsList[position].songUrl.toString(),
+                        songsList[position].songImageUrl.toString(),
+                        songsList[position].songName.toString()
+                    )
+                )
+            holder.view.list_clickable.isClickable = false
 
 
         }

@@ -1,6 +1,8 @@
 package com.chinmay.horobook.view.DrawerNavigationFragments
 
+import android.content.Context
 import android.os.Bundle
+import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import android.webkit.WebViewClient
@@ -16,6 +18,7 @@ class WebActivity : AppCompatActivity() {
         val url = intent.getStringExtra("url")
 
         url?.let { Log.d("WebActivity", it) }
+        web_loading.visibility = View.VISIBLE
 
         if (url != null) {
             web_view.webViewClient = WebViewClient()
@@ -25,5 +28,13 @@ class WebActivity : AppCompatActivity() {
             web_view.scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
 
         }
+    }
+
+    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
+        return super.onCreateView(name, context, attrs)
+
+        web_loading.visibility = View.GONE
+
+
     }
 }

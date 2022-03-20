@@ -7,18 +7,46 @@
     tools:context=".view.HoroscopeFragment">
 
     <Spinner
-        android:id="@+id/myTimeZoneSpinner"
+        android:id="@+id/langSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/daySpinner"
+        android:layout_marginTop="@dimen/margin_top"
         android:padding="@dimen/margin_top"/>
 
     <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/zodiacSpinner"
+        android:id="@+id/daySpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/myTimeZoneSpinner"
+        android:layout_below="@+id/zodaicSpinner"
         android:layout_marginTop="@dimen/margin_top"
         android:padding="@dimen/margin_top"/>
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/zodaicSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top"
+        android:padding="@dimen/margin_top"/>
+
+    <TextView
+        android:id="@+id/err_horoscope"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_horoscope"
+        android:text="Please select appropriate value"
+        android:layout_centerInParent="true"
+        android:textColor="@color/red"
+        android:textSize="15sp"
+        />
+
+    <Button
+        android:id="@+id/btn_horoscope"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin"
+        android:layout_alignParentBottom="true"
+        android:text="Show Horoscope"/>
 
 
 

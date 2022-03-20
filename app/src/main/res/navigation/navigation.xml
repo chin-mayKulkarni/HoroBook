@@ -91,8 +91,11 @@
         <argument
             android:name="lyrics"
             app:argType="string" />
-    </fragment>
 
+        <argument
+            android:name="title"
+            app:argType="string"/>
+    </fragment>
 
 
 </navigation>

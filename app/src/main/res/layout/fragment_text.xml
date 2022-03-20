@@ -6,13 +6,24 @@
     android:layout_margin="15dp"
     tools:context=".view.TextFragment">
 
+    <TextView
+        android:id="@+id/textTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Header"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center"/>
+
 
     <ScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/btn_layout"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:layout_marginTop="@dimen/margin"
+        android:layout_below="@+id/textTitle">
 
         <TextView
             android:id="@+id/mytv"
@@ -23,7 +34,6 @@
 
 
     </ScrollView>
-
 
     <RelativeLayout
         android:id="@+id/btn_layout"
@@ -37,13 +47,13 @@
             android:id="@+id/zoom_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:src="@drawable/ic_zoom_in" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/zoom_out"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:src="@drawable/ic_zoom_out_img" />
 
 
