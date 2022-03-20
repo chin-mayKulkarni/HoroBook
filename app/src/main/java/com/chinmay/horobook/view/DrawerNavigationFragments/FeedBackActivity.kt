@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.chinmay.horobook.R
+import com.chinmay.horobook.model.Feedback
 import com.chinmay.horobook.model.SongData
 import com.chinmay.horobook.model.SongsApiService
 import com.chinmay.horobook.util.SharedPreferencesHelper
@@ -68,7 +69,7 @@ class FeedBackActivity : AppCompatActivity() {
 
                 deviceID = prefHelper?.getAuthKey().toString()
                 Log.d("DeviceID", "Device Id is: " + deviceID)
-                showDialog("Clicked", "You have submitted the feedback")
+
 
                     var jsonObj = JSONObject()
                     jsonObj.put("device", deviceID)
@@ -79,19 +80,14 @@ class FeedBackActivity : AppCompatActivity() {
 
 
                 disposable.add(
-                    songsService.submitFeedback( jsonObj)
+                    songsService.submitFeedback(jsonObj)
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeWith(object : DisposableSingleObserver<List<SongData>>() {
+                        .subscribeWith(object : DisposableSingleObserver<Feedback>() {
 
-                            override fun onSuccess(t: List<SongData>) {
+                            override fun onSuccess(t: Feedback) {
                                 Log.d("response", "Auth Response is: " + t)
-                                Toast.makeText(
-                                    getApplication(),
-                                    "Retrieved from Remote",
-                                    Toast.LENGTH_LONG
-                                )
-                                    .show()
+                                showDialog("Thank You!!", "You have submitted the feedback")
                             }
 
                             override fun onError(e: Throwable) {

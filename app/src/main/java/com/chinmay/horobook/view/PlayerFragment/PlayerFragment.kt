@@ -43,7 +43,7 @@ class PlayerFragment : Fragment() {
 
 
 
-        songUrl = args.songUrl
+        songUrl = UrlConstants.media_url + args.songUrl
         val songImageUrl = args.songImageUrl
         Log.d("playerFragment", "SongListData value is : " + args.songName)
         val songName = args.songName

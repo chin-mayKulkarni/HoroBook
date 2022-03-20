@@ -15,14 +15,14 @@ data class SongData(
     @SerializedName("album_name")
     val dogBreed: String?,
 
-    @ColumnInfo(name="life_span")
+    @ColumnInfo(name = "life_span")
     @SerializedName("artist")
     val lifeSpan: String?,
 
     @ColumnInfo(name = "dog_url")
     @SerializedName("album_cover_image")
     val imageUrl: String?
-){
+) {
     @PrimaryKey(autoGenerate = true)
     var uuid: Int = 0
 }
@@ -32,16 +32,16 @@ data class SongsListData(
     val songId: String?,
 
     @SerializedName("song_image")
-    val songImageUrl : String?,
+    val songImageUrl: String?,
 
     @SerializedName("song_name")
-    val songName : String?,
+    val songName: String?,
 
     @SerializedName("artist")
-    val songArtist : String?,
+    val songArtist: String?,
 
-    @SerializedName("firebase_url")
-    val songUrl : String?,
+    @SerializedName("media_file")
+    val songUrl: String?,
 )
 
 data class LyricsListData(
@@ -49,14 +49,35 @@ data class LyricsListData(
     val songId: String?,
 
     @SerializedName("song_lyric_image")
-    val songImageUrl : String?,
+    val songImageUrl: String?,
 
     @SerializedName("song_name")
-    val songName : String?,
+    val songName: String?,
 
     @SerializedName("artist")
-    val songArtist : String?,
+    val songArtist: String?,
 
     @SerializedName("lyrics")
-    val songLyrics : String?,
+    val songLyrics: String?,
+)
+
+data class Feedback(
+
+    val Message: String?,
+
+    val ERROR: String?,
+)
+
+data class Horoscope(
+    val date_range: String?,
+
+    val description: String?,
+
+    val mood: String?,
+
+    val color: String?,
+
+    val lucky_number: String?,
+
+    val lucky_time: String?,
 )

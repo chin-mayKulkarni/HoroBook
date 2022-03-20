@@ -35,7 +35,10 @@ class MantrasListAdapter(val songsList: ArrayList<LyricsListData>) :
         holder.view.setOnClickListener {
             Navigation.findNavController(it)
                 .navigate(
-                    MantrasListFragmentDirections.actionTextFragment(songsList[position].songLyrics.toString())
+                    MantrasListFragmentDirections.actionTextFragment(
+                        songsList[position].songLyrics.toString(),
+                        songsList[position].songName.toString()
+                    )
                 )
             Toast.makeText(
                 holder.view.context,

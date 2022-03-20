@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_text.*
 
 class TextFragment : Fragment() {
 
-    var zoom_val = 25.0f
+    var zoom_val = 15.0f
 
     val args: TextFragmentArgs by navArgs()
 
@@ -28,6 +28,7 @@ class TextFragment : Fragment() {
 
         val lyrics = args.lyrics
 
+       textTitle.text = args.title
         mytv!!.textSize = zoom_val
         mytv!!.text = lyrics
 
@@ -38,7 +39,7 @@ class TextFragment : Fragment() {
         }
 
         zoom_out.setOnClickListener{
-            if (zoom_val > 25.0f)
+            if (zoom_val > 15.0f)
                 zoom_val-=5.0f
             mytv!!.textSize = zoom_val
         }

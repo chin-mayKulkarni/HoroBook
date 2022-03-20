@@ -27,8 +27,11 @@ interface SongsApi {
     @GET("Songs/SongLyrics/{albumId}/{auth_key}")
     fun getLyricsList(@Path("albumId") albumId : String, @Path("auth_key") auth_key : String) : Single<List<LyricsListData>>
 
+    @POST("Feedback/AddFeedback/")
+    fun submitFeedback(@Body body: JSONObject): Single<Feedback>
 
-    @POST("Feedback/AddFeedback")
-    fun submitFeedback(@Body body: JSONObject): Single<List<SongData>>
+
+    @POST("Horoscope/CheckAstrology/{auth_key}/")
+    fun getHoroscope( @Path("auth_key") auth_key: String, @Body body: JSONObject): Single<Horoscope>
 
 }
