@@ -15,6 +15,10 @@ data class SongData(
     @SerializedName("album_name")
     val dogBreed: String?,
 
+    @ColumnInfo(name="search_val")
+    @SerializedName("query")
+    val search_query: String?,
+
     @ColumnInfo(name = "life_span")
     @SerializedName("artist")
     val lifeSpan: String?,
@@ -40,6 +44,9 @@ data class SongsListData(
     @SerializedName("artist")
     val songArtist: String?,
 
+    @SerializedName("crawl_required")
+    val playSong: Boolean?,
+
     @SerializedName("media_file")
     val songUrl: String?,
 )
@@ -53,6 +60,9 @@ data class LyricsListData(
 
     @SerializedName("song_name")
     val songName: String?,
+
+    @SerializedName("query")
+    val search_query: String?,
 
     @SerializedName("artist")
     val songArtist: String?,

@@ -48,7 +48,7 @@ class MantrasFragment : Fragment() {
     private fun filterList(text: String) {
         val temp: MutableList<SongData> = ArrayList()
         for (d in mantrasListLocal) {
-            if (d.dogBreed!!.contains(text, true)) {
+            if (d.search_query!!.contains(text, true)) {
                 temp.add(d)
             }
         }

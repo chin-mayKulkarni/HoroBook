@@ -1,5 +1,6 @@
 package com.chinmay.horobook.view.DrawerNavigationFragments
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.AttributeSet
@@ -11,6 +12,7 @@ import com.chinmay.horobook.R
 import kotlinx.android.synthetic.main.activity_web.*
 
 class WebActivity : AppCompatActivity() {
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web)
@@ -27,14 +29,11 @@ class WebActivity : AppCompatActivity() {
             web_view.settings.javaScriptEnabled = true
             web_view.scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
 
+
         }
     }
 
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
         return super.onCreateView(name, context, attrs)
-
-        web_loading.visibility = View.GONE
-
-
     }
 }

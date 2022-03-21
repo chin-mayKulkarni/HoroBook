@@ -97,6 +97,7 @@ class HoroscopeFragment : Fragment() {
                     "Selected item is : " + langSpinner.adapter.getItem(position).toString()
                 )
                 langSel = langSpinner.adapter.getItem(position).toString()
+                if (langSel.equals("English")) langSel = "en"
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
