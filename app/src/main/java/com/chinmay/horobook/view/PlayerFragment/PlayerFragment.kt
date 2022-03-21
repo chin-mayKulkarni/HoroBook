@@ -96,6 +96,8 @@ class PlayerFragment : Fragment() {
 
     private fun playSong(songUrl: String) {
 
+        Log.d("Player fragment", "Song Url :$songUrl")
+
 
         if (mediaPlayer == null) {
             mediaPlayer = MediaPlayer.create(context, Uri.parse(songUrl))
