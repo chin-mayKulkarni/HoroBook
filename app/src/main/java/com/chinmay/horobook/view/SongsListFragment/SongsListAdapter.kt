@@ -40,7 +40,7 @@ class SongsListAdapter(val songsList: ArrayList<SongsListData>) :
         holder.view.name.text = songsList[position].songName
         holder.view.lifespan.text = songsList[position].songArtist
         holder.view.setOnClickListener {
-            if (songsList[position].playSong == true) {
+            if (songsList[position].doNotPlaySong == false) {
                 Navigation.findNavController(it)
                     .navigate(
                         SongsListFragmentDirections.actionPlayerFragment(

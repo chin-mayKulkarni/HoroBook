@@ -3,6 +3,8 @@ package com.chinmay.horobook
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -12,6 +14,7 @@ import com.chinmay.horobook.view.DrawerNavigationFragments.FeedBackActivity
 import com.chinmay.horobook.view.DrawerNavigationFragments.WebActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.nav_header.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,6 +37,13 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        val headerView : View = nav_view.getHeaderView(0)
+        var version_txt : TextView = headerView.findViewById(R.id.version_txt)
+
+        version_txt.text = "v " + BuildConfig.VERSION_NAME+ "(" + BuildConfig.VERSION_CODE + ")"
+
+
+
 
 //on click listener of navigation drawer
         nav_view.setNavigationItemSelectedListener {
@@ -52,18 +62,21 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_privacy -> {
                     val intent = Intent(this, WebActivity::class.java)
                     intent.putExtra("url", UrlConstants.privacy_policy)
+                    intent.putExtra("title", "Privacy Policy")
                     startActivity(intent)
                 }
 
                 R.id.nav_about -> {
                     val intent = Intent(this, WebActivity::class.java)
                     intent.putExtra("url", UrlConstants.about_us)
+                    intent.putExtra("title", "About")
                     startActivity(intent)
                 }
 
                 R.id.nav_terms -> {
                     val intent = Intent(this, WebActivity::class.java)
                     intent.putExtra("url", UrlConstants.terms)
+                    intent.putExtra("title", "Terms & Conditions")
                     startActivity(intent)
                 }
 

@@ -18,6 +18,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_feed_back.*
+import kotlinx.android.synthetic.main.activity_web.*
 import org.json.JSONObject
 
 
@@ -54,16 +55,16 @@ class FeedBackActivity : AppCompatActivity() {
 
         checkFieldsForEmptyValues()
 
+        toolbarFeed.title = "Feedback"
+
+        toolbarFeed.setNavigationOnClickListener(View.OnClickListener {
+            // back button pressed
+            this.onBackPressed()
+        })
+
         btn_submit.setOnClickListener {
             validateInput()
             if (errorText.visibility != View.VISIBLE) {
-
-                /*{
-                    "device":"1234567891234567",
-                    "email":"bfbfbf",
-                    "feedback_message":"hhh",
-                    "mobile":"8989"
-                }*/
 
                 prefHelper = SharedPreferencesHelper(applicationContext)
 

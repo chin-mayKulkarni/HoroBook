@@ -7,6 +7,14 @@
     android:orientation="vertical"
     tools:context=".view.DrawerNavigationFragments.WebActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:title="Title"
+        app:theme="@style/Base_ToolbarStyle"
+        app:navigationIcon="?attr/homeAsUpIndicator" />
+
     <WebView
         android:id="@+id/web_view"
         android:layout_width="match_parent"

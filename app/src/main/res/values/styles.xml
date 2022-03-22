@@ -9,4 +9,28 @@
     <style name="Text">
         <item name="android:textSize">14sp</item>
     </style>
+
+
+    <!--<style name="Base_ToolbarStyle">
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:textColorPrimary">@color/purple_500_n</item>
+        &lt;!&ndash; Used to color back button and three dots &ndash;&gt;
+        <item name="android:textColorSecondary">@color/purple_700_n</item>
+
+        <item name="titleTextAppearance">@style/CustomTitleTextAppearance</item>
+        <item name="subtitleTextAppearance">@style/CustomSubTitleTextAppearance</item>
+    </style>
+
+    <style name="CustomTitleTextAppearance" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/purple_500_n</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CustomSubTitleTextAppearance" parent="TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/purple_500_n</item>
+        <item name="android:textStyle">italic</item>
+    </style>-->
 </resources>

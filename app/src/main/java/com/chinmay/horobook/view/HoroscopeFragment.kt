@@ -149,6 +149,7 @@ class HoroscopeFragment : Fragment() {
 
                 val intent = Intent(activity, WebActivity::class.java)
                 intent.putExtra("url", UrlConstants.media_url + UrlConstants.horoscope + zodaicSign +"/" + day +"/" + langSel +"/" + deviceID)
+                intent.putExtra("title", "Horoscope")
                 startActivity(intent)
             }
         }

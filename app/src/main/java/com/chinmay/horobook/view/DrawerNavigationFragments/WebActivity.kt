@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.chinmay.horobook.R
 import kotlinx.android.synthetic.main.activity_web.*
 
+
 class WebActivity : AppCompatActivity() {
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,9 +19,17 @@ class WebActivity : AppCompatActivity() {
         setContentView(R.layout.activity_web)
 
         val url = intent.getStringExtra("url")
+        val title = intent.getStringExtra("title")
 
         url?.let { Log.d("WebActivity", it) }
         web_loading.visibility = View.VISIBLE
+
+
+        toolbar.title = title
+        toolbar.setNavigationOnClickListener(View.OnClickListener {
+            // back button pressed
+            this.onBackPressed()
+        })
 
         if (url != null) {
             web_view.webViewClient = WebViewClient()

@@ -7,10 +7,20 @@
     android:layout_margin="10dp"
     tools:context=".view.DrawerNavigationFragments.FeedBackActivity">
 
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarFeed"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:title="Title"
+        app:navigationIcon="?attr/homeAsUpIndicator" />
+
     <TextView
         android:id="@+id/header_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_below="@+id/toolbarFeed"
         android:text="Your feedback is most valuable, please give your feedback!!"
         android:textAlignment="center"
         android:textSize="@dimen/activity_horizontal_margin" />

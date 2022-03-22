@@ -45,7 +45,7 @@ data class SongsListData(
     val songArtist: String?,
 
     @SerializedName("crawl_required")
-    val playSong: Boolean?,
+    val doNotPlaySong: Boolean?,
 
     @SerializedName("media_file")
     val songUrl: String?,
