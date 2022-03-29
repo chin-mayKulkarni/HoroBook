@@ -14,6 +14,8 @@ import com.chinmay.horobook.R
 import com.chinmay.horobook.UrlConstants
 import com.chinmay.horobook.util.SharedPreferencesHelper
 import com.chinmay.horobook.view.DrawerNavigationFragments.WebActivity
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.fragment_horoscope.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -22,15 +24,14 @@ import kotlin.collections.ArrayList
 class HoroscopeFragment : Fragment() {
 
 
-    private lateinit var day : String
+    private lateinit var day: String
 
-    private lateinit var langSel : String
+    private lateinit var langSel: String
 
-    private lateinit var zodaicSign : String
+    private lateinit var zodaicSign: String
 //    private var prefHelper = this.context?.let { SharedPreferencesHelper(it) }
 
-    private lateinit var deviceID : String
-
+    private lateinit var deviceID: String
 
 
     override fun onCreateView(
@@ -45,10 +46,13 @@ class HoroscopeFragment : Fragment() {
 
         err_horoscope.visibility = View.GONE
 
-         var prefHelper = SharedPreferencesHelper(view.context)
+        //Initialize adMob add
+        MobileAds.initialize(context) {}
+        val adRequest = AdRequest.Builder().build()
+        horoscopeBanner.loadAd(adRequest)
 
 
-
+        var prefHelper = SharedPreferencesHelper(view.context)
 
 
         val list = ArrayList<String>()
@@ -80,9 +84,17 @@ class HoroscopeFragment : Fragment() {
         langSpinner.adapter = adapter
 
 
-        daySpinner.adapter = ArrayAdapter<String>(view.context, R.layout.support_simple_spinner_dropdown_item, dayList)
+        daySpinner.adapter = ArrayAdapter<String>(
+            view.context,
+            R.layout.support_simple_spinner_dropdown_item,
+            dayList
+        )
 
-        zodaicSpinner.adapter = ArrayAdapter<String>(view.context, R.layout.support_simple_spinner_dropdown_item, zodaicList)
+        zodaicSpinner.adapter = ArrayAdapter<String>(
+            view.context,
+            R.layout.support_simple_spinner_dropdown_item,
+            zodaicList
+        )
 
 
         langSpinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
@@ -115,7 +127,7 @@ class HoroscopeFragment : Fragment() {
                     "Horoscope fragment",
                     "Selected item is : " + daySpinner.adapter.getItem(position).toString()
                 )
-                day= daySpinner.adapter.getItem(position).toString()
+                day = daySpinner.adapter.getItem(position).toString()
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -142,13 +154,16 @@ class HoroscopeFragment : Fragment() {
         })
 
         btn_horoscope.setOnClickListener {
-            if (langSel.equals(null) || zodaicSign.equals(null) || day.equals(null)){
+            if (langSel.equals(null) || zodaicSign.equals(null) || day.equals(null)) {
                 err_horoscope.visibility = View.VISIBLE
-            } else{
+            } else {
                 deviceID = prefHelper?.getAuthKey().toString()
 
                 val intent = Intent(activity, WebActivity::class.java)
-                intent.putExtra("url", UrlConstants.media_url + UrlConstants.horoscope + zodaicSign +"/" + day +"/" + langSel +"/" + deviceID)
+                intent.putExtra(
+                    "url",
+                    UrlConstants.media_url + UrlConstants.horoscope + zodaicSign + "/" + day + "/" + langSel + "/" + deviceID
+                )
                 intent.putExtra("title", "Horoscope")
                 startActivity(intent)
             }

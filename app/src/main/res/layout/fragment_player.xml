@@ -84,7 +84,15 @@
             android:padding="90dp"
             android:src="@drawable/ic_pause"
             app:fabCustomSize="120dp"
-            app:maxImageSize="100dp" />
+            app:maxImageSize="100dp"
+            android:contentDescription="@string/play_btn_desc" />
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/playerBanner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:adSize="BANNER"
+            app:adUnitId="@string/player_unit_id" />
 
 
     </LinearLayout>

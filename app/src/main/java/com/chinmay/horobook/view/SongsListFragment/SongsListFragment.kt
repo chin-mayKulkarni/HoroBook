@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.fragment_songs_list.*
 
 class SongsListFragment : Fragment() {
 
+
     private lateinit var viewModel: ListViewModel
     private val songsListAdapter = SongsListAdapter(arrayListOf())
 
@@ -60,7 +61,7 @@ class SongsListFragment : Fragment() {
         viewModel.songsList.observe(viewLifecycleOwner, Observer { songs ->
             songs?.let{
                 songsListRecyclerView.visibility = View.VISIBLE
-                songsListAdapter.updateSongsList(songs)
+                songsListAdapter.updateSongsList(songs, viewModel)
                 listSongsError.visibility = View.GONE
                 loadingSongsView.visibility = View.GONE
             }
