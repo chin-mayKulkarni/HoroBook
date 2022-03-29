@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.chinmay.horobook.R
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.fragment_text.*
 
 
@@ -27,6 +29,9 @@ class TextFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val lyrics = args.lyrics
+        MobileAds.initialize(context){}
+        val adRequest = AdRequest.Builder().build()
+        textBanner.loadAd(adRequest)
 
        textTitle.text = args.title
         mytv!!.textSize = zoom_val

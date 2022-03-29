@@ -8,4 +8,34 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="privacy_policy"></string>
+    <string name="play_btn_desc">Play and Pause button</string>
+
+
+
+
+
+
+
+    //ADMOB STRINGS test
+    <string name="app_id_test">ca-app-pub-3940256099942544~3347511713</string>
+
+    <string name="player_unit_id_test">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="text_unit_id_test">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="horoscope_unit_id_test">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="feedback_unit_id_test">ca-app-pub-3940256099942544/6300978111</string>
+
+
+
+    //ADMOB STRINGS prod
+    <string name="app_id">ca-app-pub-1550066622057534~4100725050</string>
+
+    <string name="player_unit_id">ca-app-pub-1550066622057534/9851986438</string>
+    <string name="text_unit_id">ca-app-pub-1550066622057534/6933306912</string>
+    <string name="horoscope_unit_id">ca-app-pub-1550066622057534/8313837198</string>
+    <string name="feedback_unit_id">ca-app-pub-1550066622057534/7140356327</string>
+
+
+
+
+
 </resources>

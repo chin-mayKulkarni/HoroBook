@@ -50,6 +50,18 @@
             android:layout_alignParentEnd="true"
             android:src="@drawable/ic_zoom_in" />
 
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/textBanner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_toStartOf="@+id/zoom_in"
+            android:layout_toEndOf="@+id/zoom_out"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/text_unit_id">
+        </com.google.android.gms.ads.AdView>
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/zoom_out"
             android:layout_width="wrap_content"

@@ -1,5 +1,6 @@
 package com.chinmay.horobook.view.PlayerFragment
 
+import android.content.Context
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
@@ -9,12 +10,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.chinmay.horobook.R
 import com.chinmay.horobook.UrlConstants
 import com.chinmay.horobook.util.getProgressDrawable
 import com.chinmay.horobook.util.loadImage
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.fragment_player.*
 import java.util.concurrent.TimeUnit
 
@@ -41,6 +45,11 @@ class PlayerFragment : Fragment() {
 
         seekHandler = Handler()
 
+        MobileAds.initialize(context){}
+
+        val adRequest = AdRequest.Builder().build()
+        playerBanner.loadAd(adRequest)
+
 
 
         songUrl = UrlConstants.media_url + args.songUrl
@@ -57,6 +66,7 @@ class PlayerFragment : Fragment() {
             getProgressDrawable(player_image.context)
         )
         playSong(songUrl!!)
+        if (mediaPlayer!= null)
         controlSound(songUrl!!)
 
     }
@@ -101,23 +111,33 @@ class PlayerFragment : Fragment() {
 
         if (mediaPlayer == null) {
             mediaPlayer = MediaPlayer.create(context, Uri.parse(songUrl))
+            mediaPlayer.let{
+                if (it != null) {
+                    initializeSeekBar(it)
+                } else {
+                    showDialog("Sorry!!", "We cannot play this song", requireContext())
+                }
+            }
 
 
-            initializeSeekBar(mediaPlayer!!)
+           // initializeSeekBar(mediaPlayer!!)
         }
-        seekHandler.postDelayed(updateSeekBar, 15)
-        mediaPlayer!!.start()
-        Log.d("playerFragment", "Total time : " + mediaPlayer!!.duration)
-        Log.d("playerFragment", "current time : " + mediaPlayer!!.currentPosition)
-        var millis = mediaPlayer!!.duration.toLong()
+        if (mediaPlayer!=null) {
+            seekHandler.postDelayed(updateSeekBar, 15)
+            mediaPlayer!!.start()
+            Log.d("playerFragment", "Total time : " + mediaPlayer!!.duration)
+            Log.d("playerFragment", "current time : " + mediaPlayer!!.currentPosition)
+            var millis = mediaPlayer!!.duration.toLong()
 
-        //val song_time_sec = mediaPlayer!!.duration / 1000 % 60
-        val hms = String.format(
-            "%02d:%02d",
-            TimeUnit.MILLISECONDS.toMinutes(millis),
-            TimeUnit.MILLISECONDS.toSeconds(millis) % TimeUnit.MINUTES.toSeconds(1)
-        )
-        Log.d("playerFragment", "Total time in minutes : " + hms)
+            //val song_time_sec = mediaPlayer!!.duration / 1000 % 60
+            val hms = String.format(
+                "%02d:%02d",
+                TimeUnit.MILLISECONDS.toMinutes(millis),
+                TimeUnit.MILLISECONDS.toSeconds(millis) % TimeUnit.MINUTES.toSeconds(1)
+            )
+
+            Log.d("playerFragment", "Total time in minutes : " + hms)
+        }
     }
 
 
@@ -203,6 +223,38 @@ class PlayerFragment : Fragment() {
         playSong(songUrl!!)
 
     }
+
+    private fun showDialog(title: String, msg: String, context: Context) {
+        val builder = AlertDialog.Builder(context)
+        //set title for alert dialog
+        builder.setTitle(title)
+        //set message for alert dialog
+        builder.setMessage(msg)
+        //builder.setIcon(android.R.drawable.ic_input_add)
+
+        //performing positive action
+        builder.setPositiveButton("OK") { dialogInterface, which ->
+            activity?.onBackPressed()
+        }
+        /*//performing cancel action
+        builder.setNeutralButton("Cancel") { dialogInterface, which ->
+            Toast.makeText(
+                applicationContext,
+                "clicked cancel\n operation cancel",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+        //performing negative action
+        builder.setNegativeButton("No") { dialogInterface, which ->
+            Toast.makeText(applicationContext, "clicked No", Toast.LENGTH_LONG).show()
+        }*/
+        // Create the AlertDialog
+        val alertDialog: AlertDialog = builder.create()
+        // Set other dialog properties
+        alertDialog.setCancelable(false)
+        alertDialog.show()
+    }
+
 
 }
 

@@ -82,7 +82,12 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
                     }
 
                     override fun onError(e: Throwable) {
-                        songsLoadError.value = true
+                        //songsLoadError.value = true
+                        if (prefHelper.getUpdatedTime() != null) {
+                            fetchFromDatabase()
+                        } else {
+                            songsLoadError.value = true
+                        }
                         loading.value = false
                         e.printStackTrace()
                     }
@@ -134,7 +139,6 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
 
     override fun onCleared() {
         super.onCleared()
-
         disposable.clear()
     }
 }

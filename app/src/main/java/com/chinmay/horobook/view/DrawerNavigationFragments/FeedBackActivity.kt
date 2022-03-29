@@ -13,6 +13,8 @@ import com.chinmay.horobook.model.Feedback
 import com.chinmay.horobook.model.SongData
 import com.chinmay.horobook.model.SongsApiService
 import com.chinmay.horobook.util.SharedPreferencesHelper
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
@@ -52,6 +54,11 @@ class FeedBackActivity : AppCompatActivity() {
         txt_email.addTextChangedListener(mTextWatcher)
         txt_phone.addTextChangedListener(mTextWatcher)
         txt_feedback.addTextChangedListener(mTextWatcher)
+
+        //Loading Ad
+        MobileAds.initialize(applicationContext){}
+        val adRequest = AdRequest.Builder().build()
+        feedbackBanner.loadAd(adRequest)
 
         checkFieldsForEmptyValues()
 
