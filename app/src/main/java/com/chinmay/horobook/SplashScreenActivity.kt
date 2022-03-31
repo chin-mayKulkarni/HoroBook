@@ -43,8 +43,7 @@ class SplashScreenActivity : AppCompatActivity() {
                         //TODO: Store response in shared preferences
 
                         Log.d("response", "Auth Response is: " + t)
-                        Toast.makeText(getApplication(), "Retrieved from Remote", Toast.LENGTH_LONG)
-                            .show()
+                        //Toast.makeText(getApplication(), "Retrieved from Remote", Toast.LENGTH_LONG).show()
 
                     }
 

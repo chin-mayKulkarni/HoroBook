@@ -47,11 +47,11 @@ class MantrasAlbumListAdapter(val mantrasList: ArrayList<SongData>) :
                 MantrasFragmentDirections.actionMantrasListFragment(mantrasList[position].breedId.toString())
             Navigation.findNavController(it)
                 .navigate(action)
-            Toast.makeText(
+            /*Toast.makeText(
                 holder.view.context,
                 "Clicked on " + mantrasList[position].dogBreed,
                 Toast.LENGTH_SHORT
-            ).show()
+            ).show()*/
 
 
         }
@@ -70,7 +70,7 @@ class MantrasAlbumListAdapter(val mantrasList: ArrayList<SongData>) :
             mediaPlayer.stop()
             mediaPlayer.reset()
             mediaPlayer.release()
-            Toast.makeText(holder.view.context, "Song is paused", Toast.LENGTH_SHORT).show()
+           // Toast.makeText(holder.view.context, "Song is paused", Toast.LENGTH_SHORT).show()
         } else {
 
             try {
@@ -81,7 +81,7 @@ class MantrasAlbumListAdapter(val mantrasList: ArrayList<SongData>) :
                 e.printStackTrace()
             }
 
-            Toast.makeText(holder.view.context, "Song is playing", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(holder.view.context, "Song is playing", Toast.LENGTH_SHORT).show()
 
         }
 

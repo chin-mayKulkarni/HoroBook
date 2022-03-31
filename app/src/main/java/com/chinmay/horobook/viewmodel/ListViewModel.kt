@@ -31,6 +31,7 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
     val songsList = MutableLiveData<List<SongsListData>>()
     val songsListLoadError = MutableLiveData<Boolean>()
     val loadingSongs = MutableLiveData<Boolean>()
+    val showPopUp = MutableLiveData<String>()
 
     fun refresh() {
         val updatedTime = prefHelper.getUpdatedTime()
@@ -57,6 +58,7 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
                     }
 
                     override fun onError(e: Throwable) {
+                        showPopUp.value = "Sorry Songs are not available for selected Album!!"
                         songsListLoadError.value =true
                         loadingSongs.value = false
                         e.printStackTrace()
@@ -77,7 +79,7 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
                 .subscribeWith(object : DisposableSingleObserver<List<SongData>>() {
                     override fun onSuccess(t: List<SongData>) {
                         storeSongsLocally(t)
-                        Toast.makeText(getApplication(), "Retrieved from Remote", Toast.LENGTH_LONG).show()
+                        //Toast.makeText(getApplication(), "Retrieved from Remote", Toast.LENGTH_LONG).show()
 
                     }
 
@@ -103,7 +105,7 @@ class ListViewModel(application: Application) : BaseViewModel(application) {
         launch {
             val songs = SongDataBase(getApplication()).songDao().getAllSongs()
             songsRetrieved(songs)
-            Toast.makeText(getApplication(), "Retrieved from DB", Toast.LENGTH_LONG).show()
+            //Toast.makeText(getApplication(), "Retrieved from DB", Toast.LENGTH_LONG).show()
         }
     }
 

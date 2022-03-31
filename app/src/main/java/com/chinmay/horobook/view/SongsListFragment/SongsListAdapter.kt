@@ -94,7 +94,7 @@ class SongsListAdapter(val songsList: ArrayList<SongsListData>) :
             mediaPlayer.stop()
             mediaPlayer.reset()
             mediaPlayer.release()
-            Toast.makeText(holder.view.context, "Song is paused", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(holder.view.context, "Song is paused", Toast.LENGTH_SHORT).show()
         } else {
 
             try {
@@ -105,7 +105,7 @@ class SongsListAdapter(val songsList: ArrayList<SongsListData>) :
                 e.printStackTrace()
             }
 
-            Toast.makeText(holder.view.context, "Song is playing", Toast.LENGTH_SHORT).show()
+           // Toast.makeText(holder.view.context, "Song is playing", Toast.LENGTH_SHORT).show()
 
         }
 

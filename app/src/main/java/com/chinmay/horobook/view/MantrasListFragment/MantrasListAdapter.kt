@@ -40,11 +40,11 @@ class MantrasListAdapter(val songsList: ArrayList<LyricsListData>) :
                         songsList[position].songName.toString()
                     )
                 )
-            Toast.makeText(
+            /*Toast.makeText(
                 holder.view.context,
                 "Clicked on " + songsList[position].songName,
                 Toast.LENGTH_SHORT
-            ).show()
+            ).show()*/
 
 
         }

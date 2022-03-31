@@ -70,7 +70,7 @@ class MantrasViewModel(application: Application) : BaseViewModel(application) {
                     override fun onSuccess(t: List<SongData>) {
                         //storeSongsLocally(t)
                         songsRetrieved(t)
-                        Toast.makeText(getApplication(), "Retrieved from Remote", Toast.LENGTH_LONG).show()
+                       // Toast.makeText(getApplication(), "Retrieved from Remote", Toast.LENGTH_LONG).show()
 
                     }
 

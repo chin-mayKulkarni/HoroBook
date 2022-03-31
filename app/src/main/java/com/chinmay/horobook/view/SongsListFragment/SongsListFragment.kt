@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chinmay.horobook.R
+import com.chinmay.horobook.util.displayPopUp
 import com.chinmay.horobook.viewmodel.ListViewModel
 import kotlinx.android.synthetic.main.fragment_songs_list.*
 
@@ -69,10 +70,11 @@ class SongsListFragment : Fragment() {
         viewModel.songsListLoadError.observe(viewLifecycleOwner, Observer { isError ->
             isError?.let {
                 listSongsError.visibility = if (it) View.VISIBLE else View.GONE
+                if(isError) activity?.onBackPressed()
             }
         })
 
-        viewModel.loading.observe(viewLifecycleOwner, Observer { isLoading ->
+        viewModel.loadingSongs.observe(viewLifecycleOwner, Observer { isLoading ->
             isLoading?.let {
                 loadingSongsView.visibility = if (it) View.VISIBLE else View.GONE
                 if (it) {
@@ -81,6 +83,12 @@ class SongsListFragment : Fragment() {
                 }
             }
 
+        })
+
+        viewModel.showPopUp.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                context?.let { context -> displayPopUp(context, "Sorry", it ) }
+            }
         })
 
     }
