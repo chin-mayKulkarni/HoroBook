@@ -3,20 +3,19 @@ package com.chinmay.horobook.view.MantrasListFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.chinmay.horobook.R
-import com.chinmay.horobook.UrlConstants
 import com.chinmay.horobook.model.LyricsListData
-import com.chinmay.horobook.util.getProgressDrawable
-import com.chinmay.horobook.util.loadImage
-import kotlinx.android.synthetic.main.item_song.view.*
+import kotlinx.android.synthetic.main.item_mantra.view.*
 
 class MantrasListAdapter(val songsList: ArrayList<LyricsListData>) :
     RecyclerView.Adapter<MantrasListAdapter.SongViewHolder>() {
 
-    fun updateSongsList(newSongsList: List<LyricsListData>) {
+    lateinit var imageUrl : String
+
+    fun updateSongsList(newSongsList: List<LyricsListData>, image_url: String) {
+        imageUrl = image_url
         songsList.clear()
         songsList.addAll(newSongsList)
         notifyDataSetChanged()
@@ -25,13 +24,13 @@ class MantrasListAdapter(val songsList: ArrayList<LyricsListData>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.item_song, parent, false)
+        val view = inflater.inflate(R.layout.item_mantra, parent, false)
         return SongViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: SongViewHolder, position: Int) {
-        holder.view.name.text = songsList[position].songName
-        holder.view.lifespan.text = songsList[position].songArtist
+        holder.view.matra_name.text = songsList[position].songName
+        holder.view.mantra_desc.text = songsList[position].songArtist
         holder.view.setOnClickListener {
             Navigation.findNavController(it)
                 .navigate(
@@ -48,10 +47,17 @@ class MantrasListAdapter(val songsList: ArrayList<LyricsListData>) :
 
 
         }
-        holder.view.imageView.loadImage(
-            UrlConstants.media_url + songsList[position].songImageUrl,
-            getProgressDrawable(holder.view.imageView.context)
-        )
+        /*if (songsList[position].songImageUrl!= null) {
+            holder.view.imageView.loadImage(
+                UrlConstants.media_url + songsList[position].songImageUrl,
+                getProgressDrawable(holder.view.imageView.context)
+            )
+        } else {
+            holder.view.imageView.loadImage(
+                UrlConstants.media_url + imageUrl,
+                getProgressDrawable(holder.view.imageView.context)
+            )
+        }*/
     }
 
 

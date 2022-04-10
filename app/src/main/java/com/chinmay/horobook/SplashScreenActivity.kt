@@ -29,32 +29,12 @@ class SplashScreenActivity : AppCompatActivity() {
 
         prefHelper = SharedPreferencesHelper(applicationContext)
 
-        deviceID = prefHelper?.getAuthKey().toString()
+        deviceID = prefHelper.getAuthKey().toString()
         Log.d("DeviceID", "Device Id is: " + deviceID)
         if (deviceID.equals(" ")) {
             deviceID = generateDeviceId()
         }
-        disposable.add(
-            songsService.authenticate(deviceID)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object : DisposableSingleObserver<Authentication>() {
-                    override fun onSuccess(t: Authentication) {
-                        //TODO: Store response in shared preferences
-
-                        Log.d("response", "Auth Response is: " + t)
-                        //Toast.makeText(getApplication(), "Retrieved from Remote", Toast.LENGTH_LONG).show()
-
-                    }
-
-                    override fun onError(e: Throwable) {
-                        /*songsLoadError.value = true
-                        loading.value = false*/
-                        e.printStackTrace()
-                    }
-
-                })
-        )
+        callAuthApi(deviceID)
         handler = Handler()
         handler.postDelayed({
             val intent = Intent(this, MainActivity::class.java)
@@ -64,11 +44,31 @@ class SplashScreenActivity : AppCompatActivity() {
 
     }
 
+    private fun callAuthApi(deviceID: String) {
+        disposable.add(
+            songsService.authenticate(deviceID)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : DisposableSingleObserver<Authentication>() {
+                    override fun onSuccess(t: Authentication) {
+                        //TODO: Store response in shared preferences
+                        Log.d("response", "Auth Response is: " + t)
+                    }
+
+                    override fun onError(e: Throwable) {
+                        callAuthApi(generateDeviceId())
+                        e.printStackTrace()
+                    }
+
+                })
+        )
+    }
+
     private fun generateDeviceId(): String {
         val random = Random()
         val generatedInt = random.nextInt(99999999 - 11111111)
         var generatedString = generatedInt.toString()
-        generatedString = generatedString + generatedString
+        generatedString += generatedString
         Log.d("Device ID", "This is device id:$generatedString")
         prefHelper.storeDataInSharedPref(generatedString)
         return generatedString

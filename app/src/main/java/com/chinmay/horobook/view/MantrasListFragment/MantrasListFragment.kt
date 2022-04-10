@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -22,6 +23,7 @@ class MantrasListFragment : Fragment() {
     private val mantrasListAdapter = MantrasListAdapter(arrayListOf())
 
     val args : MantrasListFragmentArgs by navArgs()
+    lateinit var image_url : String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +37,7 @@ class MantrasListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MantrasViewModel::class.java)
         val albumId = args.albumId
+        image_url = args.imageUrl
         Log.d("albumId received","albumId received :" + albumId)
         viewModel.refreshMantrasList(albumId)
 
@@ -55,6 +58,19 @@ class MantrasListFragment : Fragment() {
         observeViewModel()
     }
 
+    private fun showCustomDialogue() {
+        val builder = context?.let { AlertDialog.Builder(it) }
+        builder?.setMessage("Lyrics are not available, please feel free to give feedback!!")?.setCancelable(false)
+            ?.setTitle("Sorry")
+            ?.setIcon(R.drawable.notfound)
+            ?.setPositiveButton("OK") { dialogInterface, which ->
+                activity?.onBackPressed()
+
+        }
+        val alert: AlertDialog = builder!!.create()
+        alert.show()
+    }
+
 
 
 
@@ -62,9 +78,14 @@ class MantrasListFragment : Fragment() {
         viewModel.mantrasList.observe(viewLifecycleOwner, Observer { songs ->
             songs?.let{
                 mantrasListRecyclerView.visibility = View.VISIBLE
-                mantrasListAdapter.updateSongsList(songs)
+                mantrasListAdapter.updateSongsList(songs, image_url)
                 listMantraError.visibility = View.GONE
                 loadingMantraView.visibility = View.GONE
+            }
+        })
+        viewModel.showDialogue.observe(viewLifecycleOwner, Observer{
+            it?.let {
+                showCustomDialogue()
             }
         })
         viewModel.mantrasListLoadError.observe(viewLifecycleOwner, Observer { isError ->

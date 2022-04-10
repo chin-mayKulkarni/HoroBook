@@ -5,7 +5,6 @@ import android.media.MediaPlayer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
@@ -23,8 +22,15 @@ class SongsListAdapter(val songsList: ArrayList<SongsListData>) :
     RecyclerView.Adapter<SongsListAdapter.SongViewHolder>() {
 
     lateinit var listViewModel : ListViewModel
+    lateinit var imageUrl : String
 
-    fun updateSongsList(newSongsList: List<SongsListData>, viewModel: ListViewModel) {
+
+    fun updateSongsList(
+        newSongsList: List<SongsListData>,
+        viewModel: ListViewModel,
+        image_url: String
+    ) {
+        imageUrl = image_url
         listViewModel = viewModel
         songsList.clear()
         songsList.addAll(newSongsList)
@@ -58,10 +64,18 @@ class SongsListAdapter(val songsList: ArrayList<SongsListData>) :
             }
 
         }
-        holder.view.imageView.loadImage(
-            UrlConstants.media_url + songsList[position].songImageUrl,
-            getProgressDrawable(holder.view.imageView.context)
-        )
+        if (songsList[position].songImageUrl!=null){
+
+            holder.view.imageView.loadImage(
+                UrlConstants.media_url + songsList[position].songImageUrl,
+                getProgressDrawable(holder.view.imageView.context)
+            )
+        } else {
+            holder.view.imageView.loadImage(
+                UrlConstants.media_url + imageUrl,
+                getProgressDrawable(holder.view.imageView.context)
+            )
+        }
     }
 
 

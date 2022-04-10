@@ -24,6 +24,7 @@ class SongsListFragment : Fragment() {
 
 
     val args: SongsListFragmentArgs by navArgs()
+    lateinit var image_url : String
 
 
     override fun onCreateView(
@@ -38,6 +39,7 @@ class SongsListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(ListViewModel::class.java)
         val albumId = args.albumId
+        image_url = args.imageUrl
         Log.d("albumId received","albumId received :" + albumId)
         viewModel.refreshSongsList(albumId)
 
@@ -62,7 +64,7 @@ class SongsListFragment : Fragment() {
         viewModel.songsList.observe(viewLifecycleOwner, Observer { songs ->
             songs?.let{
                 songsListRecyclerView.visibility = View.VISIBLE
-                songsListAdapter.updateSongsList(songs, viewModel)
+                songsListAdapter.updateSongsList(songs, viewModel, image_url)
                 listSongsError.visibility = View.GONE
                 loadingSongsView.visibility = View.GONE
             }
