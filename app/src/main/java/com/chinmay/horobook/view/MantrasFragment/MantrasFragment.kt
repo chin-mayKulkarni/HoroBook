@@ -1,11 +1,17 @@
 package com.chinmay.horobook.view.MantrasFragment
 
+import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.Bundle
+import android.provider.Settings
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -31,7 +37,6 @@ class MantrasFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_mantras, container, false)
     }
 
@@ -57,12 +62,13 @@ class MantrasFragment : Fragment() {
 
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProviders.of(this).get(MantrasViewModel::class.java)
-        viewModel.refreshMantras()
+        if (isInternetConnected()){
+            viewModel.refreshMantras()
+        } else showCustomDialogue()
 
         mantrasList.apply {
             layoutManager = LinearLayoutManager(context)
@@ -80,6 +86,7 @@ class MantrasFragment : Fragment() {
 
         }
 
+        mantras_search.isEnabled = false
         mantras_search.addTextChangedListener(mantrasSearchTextWatcher)
         observeViewModel()
     }
@@ -87,6 +94,7 @@ class MantrasFragment : Fragment() {
     private fun observeViewModel(){
         viewModel.mantras.observe(viewLifecycleOwner, Observer { songs ->
             songs?.let{
+                mantras_search.isEnabled = true
                 mantrasList.visibility = View.VISIBLE
                 mantrasListLocal = songs
                 mantrasAlbumListAdapter.updateMantrasList(songs)
@@ -109,5 +117,31 @@ class MantrasFragment : Fragment() {
 
         })
     }
+
+    private fun isInternetConnected(): Boolean {
+        val connectivityManager =
+            this.context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        val wifiConnection = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
+        val mobileConnection = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
+        return wifiConnection != null && wifiConnection.isConnected || mobileConnection != null && mobileConnection.isConnected
+    }
+
+
+    private fun showCustomDialogue() {
+        val builder = context?.let { AlertDialog.Builder(it) }
+        builder?.setMessage("Please connect to internet to Proceed")?.setCancelable(false)
+            ?.setTitle("No Internet")
+            ?.setIcon(R.drawable.nointernet)?.setPositiveButton("Connect",
+                DialogInterface.OnClickListener { dialog, which ->
+                    startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
+                })?.setNegativeButton("Cancel",
+                DialogInterface.OnClickListener { dialog, which ->
+
+                })
+        val alert: AlertDialog = builder!!.create()
+        alert.show()
+    }
+
 
 }

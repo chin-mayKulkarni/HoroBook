@@ -1,9 +1,14 @@
 package com.chinmay.horobook.viewmodel
 
 import android.app.Application
+import android.content.DialogInterface
+import android.content.Intent
+import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.MutableLiveData
+import com.chinmay.horobook.R
 import com.chinmay.horobook.model.LyricsListData
 import com.chinmay.horobook.model.SongData
 import com.chinmay.horobook.model.SongsApiService
@@ -27,6 +32,7 @@ class MantrasViewModel(application: Application) : BaseViewModel(application) {
     val mantrasList = MutableLiveData<List<LyricsListData>>()
     val mantrasListLoadError = MutableLiveData<Boolean>()
     val loadingMantras = MutableLiveData<Boolean>()
+    val showDialogue = MutableLiveData<Boolean>()
 
 
 
@@ -46,7 +52,11 @@ class MantrasViewModel(application: Application) : BaseViewModel(application) {
                     }
 
                     override fun onError(e: Throwable) {
-                        mantrasListLoadError.value =true
+                        if(e.message.toString().contains("Not Found", true) ){
+                            showDialogue.value = true
+                        } else {
+                            mantrasListLoadError.value =true
+                        }
                         loadingMantras.value = false
                         e.printStackTrace()
                     }
@@ -103,4 +113,6 @@ class MantrasViewModel(application: Application) : BaseViewModel(application) {
 
         disposable.clear()
     }
+
+
 }

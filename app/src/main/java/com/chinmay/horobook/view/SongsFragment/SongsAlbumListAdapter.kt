@@ -43,16 +43,13 @@ class SongsAlbumListAdapter(val songsList: ArrayList<SongData>) :
         holder.view.name.text = songsList[position].dogBreed
         holder.view.lifespan.text = songsList[position].lifeSpan
         holder.view.setOnClickListener {
-            // playAudio(holder)
+
             val action =
-                SongsFragmentDirections.actionSongsListFragment(songsList[position].breedId.toString())
+                SongsFragmentDirections.actionSongsListFragment(songsList[position].breedId.toString(),
+                    songsList[position].imageUrl.toString() )
             Navigation.findNavController(it)
                 .navigate(action)
-            /*Toast.makeText(
-                holder.view.context,
-                "Clicked on " + songsList[position].dogBreed,
-                Toast.LENGTH_SHORT
-            ).show()*/
+
 
 
         }

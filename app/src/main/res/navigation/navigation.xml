@@ -41,6 +41,10 @@
             android:name="album_id"
             android:defaultValue="0"
             app:argType="string" />
+        <argument
+            android:name="image_url"
+            android:defaultValue="0"
+            app:argType="string" />
         <action
             android:id="@+id/actionPlayerFragment"
             app:destination="@id/playerFragment" />
@@ -72,6 +76,11 @@
         android:label="MantrasListFragment" >
         <argument
             android:name="album_id"
+            android:defaultValue="0"
+            app:argType="string" />
+
+        <argument
+            android:name="image_url"
             android:defaultValue="0"
             app:argType="string" />
 

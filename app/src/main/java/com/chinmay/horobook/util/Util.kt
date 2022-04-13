@@ -26,7 +26,23 @@ fun displayPopUp(context: Context, header: String, text: String): AlertDialog {
     builder.setPositiveButton("OK") { dialogInterface, which ->
 
     }
+    return builder.create().apply {
+        setCancelable(false)
+        show()
+    }
+}
 
+fun displayTwoButtonPopUp(context: Context, header: String, text: String): AlertDialog {
+    //return showDialog(header, text, context)
+    val builder = AlertDialog.Builder(context)
+    builder.setTitle(header)
+    builder.setMessage(text)
+    builder.setPositiveButton("YES") { dialogInterface, which ->
+
+    }
+    builder.setNegativeButton("NO") { dialogInterface, which ->
+
+    }
     return builder.create().apply {
         setCancelable(false)
         show()

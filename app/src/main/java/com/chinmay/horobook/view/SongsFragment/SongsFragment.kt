@@ -1,11 +1,18 @@
 package com.chinmay.horobook.view.SongsFragment
 
+import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
+import android.provider.Settings
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -58,7 +65,10 @@ class SongsFragment : Fragment() {
         search_bar.clearFocus()
 
         viewModel = ViewModelProviders.of(this).get(ListViewModel::class.java)
-        viewModel.refresh()
+
+        if (isInternetConnected()) {
+            viewModel.refresh()
+        } else showCustomDialogue()
 
         songsList.apply {
             layoutManager = LinearLayoutManager(context)
@@ -75,7 +85,9 @@ class SongsFragment : Fragment() {
             refreshLayout.isRefreshing = false
 
         }
+        search_bar.isEnabled = false
         search_bar.addTextChangedListener(searchTextChangeWatcher)
+
         observeViewModel()
     }
 
@@ -83,6 +95,7 @@ class SongsFragment : Fragment() {
         viewModel.songs.observe(viewLifecycleOwner, Observer { songs ->
             songs?.let {
                 songsListLocal = songs
+                search_bar.isEnabled = true
                 songsList.visibility = View.VISIBLE
                 songsAlbumListAdapter.updateSongsList(songs)
             }
@@ -104,5 +117,29 @@ class SongsFragment : Fragment() {
         })
     }
 
+    private fun isInternetConnected(): Boolean {
+        val connectivityManager =
+            this.context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        val wifiConnection = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
+        val mobileConnection = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
+        return wifiConnection != null && wifiConnection.isConnected || mobileConnection != null && mobileConnection.isConnected
+    }
+
+
+    private fun showCustomDialogue() {
+        val builder = context?.let { AlertDialog.Builder(it) }
+        builder?.setMessage("Please connect to internet to Proceed")?.setCancelable(false)
+            ?.setTitle("No Internet")
+            ?.setIcon(R.drawable.nointernet)?.setPositiveButton("Connect",
+                DialogInterface.OnClickListener { dialog, which ->
+                    startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
+                })?.setNegativeButton("Cancel",
+                DialogInterface.OnClickListener { dialog, which ->
+
+                })
+        val alert: AlertDialog = builder!!.create()
+        alert.show()
+    }
 
 }

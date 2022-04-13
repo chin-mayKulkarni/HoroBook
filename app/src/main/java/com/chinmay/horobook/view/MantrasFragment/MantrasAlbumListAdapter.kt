@@ -44,7 +44,8 @@ class MantrasAlbumListAdapter(val mantrasList: ArrayList<SongData>) :
         holder.view.setOnClickListener {
             // playAudio(holder)
             val action =
-                MantrasFragmentDirections.actionMantrasListFragment(mantrasList[position].breedId.toString())
+                MantrasFragmentDirections.actionMantrasListFragment(mantrasList[position].breedId.toString(),
+                    mantrasList[position].imageUrl.toString())
             Navigation.findNavController(it)
                 .navigate(action)
             /*Toast.makeText(
