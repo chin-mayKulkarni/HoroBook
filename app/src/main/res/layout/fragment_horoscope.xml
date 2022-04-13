@@ -32,10 +32,11 @@
     <com.google.android.gms.ads.AdView
         xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/horoscopeBanner"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_above="@+id/err_horoscope"
+        android:layout_marginBottom="30dp"
+        android:layout_above="@+id/btn_horoscope"
         ads:adSize="BANNER"
         ads:adUnitId="@string/horoscope_unit_id">
     </com.google.android.gms.ads.AdView>

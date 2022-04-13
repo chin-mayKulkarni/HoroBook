@@ -95,7 +95,7 @@
 
             <com.google.android.gms.ads.AdView
                 android:id="@+id/playerBanner"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 app:adSize="BANNER"
                 app:adUnitId="@string/player_unit_id" />
